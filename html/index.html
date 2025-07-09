@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Резюме - t0buleu</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-y: auto;
+      font-family: "Roboto", monospace;
+      background: black;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: #0d2408;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(102, 255, 42, 0.5);
+      color: #acff8b;
+    }
+
+    h1 {
+      color: #acff8b;
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #acff8b;
+      border-bottom: 2px solid #acff8b;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    /* Цвет текста в списках и подсписках */
+    ul.skills,
+    ul.skills * {
+      color: #94f06f !important;
+    }
+
+    ul.skills {
+      list-style: none;
+      padding-left: 0;
+      font-size: 1em;
+    }
+
+    ul.skills li::before {
+      content: "✅";
+      margin-right: 10px;
+    }
+
+    ul.skills li ul {
+      list-style: none; 
+      margin-top: 5px;
+      margin-bottom: 10px;
+      margin-left: 20px;
+      padding-left: 0;
+    }
+
+    ul.skills li ul li::before {
+      content: "📈";
+      margin-right: 10px;
+    }
+
+    p.note {
+      margin-top: 20px;
+      font-style: italic;
+      color: #94f06f;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      ul.skills {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <div class="container">
+    <h1>t0buleu</h1>
+    <h2>Навыки</h2>
+    <ul class="skills">
+      <li>Программирование на Golang</li>
+      <li>Разработка на Python (опыт написания скриптов и приложений)</li>
+      <li>Работа с системой контроля версий Git (ветвление, слияние, управление репозиториями)</li>
+      <li>Опыт работы с контейнерами Docker</li>
+      <li>Мониторинг и алертинг:
+        <ul>
+          <li>Prometheus (экспортеры, метрики, Alertmanager)</li>
+          <li>Grafana (дашборды, визуализация, интеграция с Loki)</li>
+          <li>Kubernetes мониторинг (kube-state-metrics, node-exporter)</li>
+        </ul>
+      </li>
+      <li>Работа с Bash, редакторы Nano и Vi</li>
+      <li>Умение работать с технической документацией</li>
+      <li>Опыт с Unix-подобными системами (Linux, Debian и производные)</li>
+    </ul>
+    <p class="note">В свободное время слежу за новостями IT, чтобы упростить и автоматизировать рабочие процессы.</p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00FF00";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>

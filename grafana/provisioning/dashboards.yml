@@ -1,0 +1,10 @@
+apiVersion: 1
+
+providers:
+  - name: 'default'
+    folder: 'NGINX'
+    type: file
+    options:
+      path: /etc/grafana/dashboards
+      overwrite: true
+      homeDashboardUid: nginx-dashboard

@@ -1,0 +1,62 @@
+{
+  "id": null,
+  "uid": "nginx-dashboard",
+  "title": "NGINX Exporter Overview",
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Exporter Status (nginx_up)",
+      "targets": [
+        {
+          "expr": "nginx_up",
+          "format": "time_series"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": null, "color": "green" },
+              { "value": 0.5, "color": "red" }
+            ]
+          }
+        }
+      },
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 0 }
+    },
+    {
+      "type": "stat",
+      "title": "Active Connections",
+      "targets": [
+        { "expr": "nginx_connections_active", "format": "time_series" }
+      ],
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 0 }
+    },
+    {
+      "type": "time_series",
+      "title": "Accepted vs Handled Connections",
+      "targets": [
+        { "expr": "nginx_connections_accepted", "legendFormat": "accepted" },
+        { "expr": "nginx_connections_handled", "legendFormat": "handled" }
+      ],
+      "gridPos": { "h": 5, "w": 12, "x": 0, "y": 4 }
+    },
+    {
+      "type": "time_series",
+      "title": "HTTP Requests Total",
+      "targets": [
+        { "expr": "nginx_http_requests_total", "legendFormat": "requests" }
+      ],
+      "gridPos": { "h": 5, "w": 12, "x": 0, "y": 10 }
+    }
+  ],
+  "templating": { "list": [] },
+  "annotations": { "list": [] },
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "5s"
+}
+
