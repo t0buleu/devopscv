@@ -60,7 +60,7 @@
 │   ├── dashboards/       # JSON-дэшборды Grafana
 │   └── provisioning/     # Настройки автопровижена
 ├── loki-config.yaml
-├── promtail-config.yaml
+└── promtail-config.yaml
 ```
 
 ---
