@@ -4,4 +4,8 @@ global:
 scrape_configs:
   - job_name: 'nginx'
     static_configs:
-      - targets: ['nginx-exporter:9113']
+      - targets: ['t0-n-e:9113']
+      
+  - job_name: node
+    static_configs:
+      - targets: ['myproject-node-exporter-1:9100']
