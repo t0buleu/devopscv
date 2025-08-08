@@ -79,3 +79,27 @@
 - Prometheus: http://localhost:9090
 - Grafana: http://localhost:3000 (логин: `admin`, пароль: `admin`)
 - Loki API: http://localhost:3100
+
+---
+
+### 🖼 Схема работы
+
+```mermaid
+flowchart TD
+    subgraph Server
+        Nginx
+        App
+        SystemMetrics
+    end
+
+    Nginx -- метрики --> NginxExporter
+    SystemMetrics -- метрики --> NodeExporter
+    Nginx -- логи --> Promtail
+    App -- логи --> Promtail
+
+    NginxExporter --> Prometheus
+    NodeExporter --> Prometheus
+    Promtail --> Loki
+
+    Prometheus --> Grafana
+    Loki --> Grafana
